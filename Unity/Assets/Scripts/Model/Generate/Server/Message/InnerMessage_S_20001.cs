@@ -696,19 +696,19 @@ namespace ET
         [MemoryPackOrder(4)]
         public ActorId ActorId { get; set; }
 
-        public static ObjectGetResponse Create(int error = default, string message = default, int type = default, ActorId actorId = default, bool isFromPool = false)
+        public static ObjectGetResponse Create(int type = default, ActorId actorId = default, int error = default, string message = default, bool isFromPool = false)
         {
             ObjectGetResponse msg = ObjectPool.Instance.Fetch(typeof(ObjectGetResponse), isFromPool) as ObjectGetResponse;
-            msg.Set(error, message, type, actorId);
+            msg.Set(type, actorId, error, message);
             return msg;
         }
 
-        public void Set(int error = default, string message = default, int type = default, ActorId actorId = default)
+        public void Set(int type = default, ActorId actorId = default, int error = default, string message = default)
         {
-            this.Error = error;
-            this.Message = message;
             this.Type = type;
             this.ActorId = actorId;
+            this.Error = error;
+            this.Message = message;
         }
 
         public override void Dispose()
@@ -784,19 +784,19 @@ namespace ET
         [MemoryPackOrder(4)]
         public long GateId { get; set; }
 
-        public static G2R_GetLoginKey Create(int error = default, string message = default, long key = default, long gateId = default, bool isFromPool = false)
+        public static G2R_GetLoginKey Create(long key = default, long gateId = default, int error = default, string message = default, bool isFromPool = false)
         {
             G2R_GetLoginKey msg = ObjectPool.Instance.Fetch(typeof(G2R_GetLoginKey), isFromPool) as G2R_GetLoginKey;
-            msg.Set(error, message, key, gateId);
+            msg.Set(key, gateId, error, message);
             return msg;
         }
 
-        public void Set(int error = default, string message = default, long key = default, long gateId = default)
+        public void Set(long key = default, long gateId = default, int error = default, string message = default)
         {
-            this.Error = error;
-            this.Message = message;
             this.Key = key;
             this.GateId = gateId;
+            this.Error = error;
+            this.Message = message;
         }
 
         public override void Dispose()
@@ -857,18 +857,18 @@ namespace ET
         [MemoryPackOrder(3)]
         public byte[] Entity { get; set; }
 
-        public static ObjectQueryResponse Create(int error = default, string message = default, byte[] entity = default, bool isFromPool = false)
+        public static ObjectQueryResponse Create(byte[] entity = default, int error = default, string message = default, bool isFromPool = false)
         {
             ObjectQueryResponse msg = ObjectPool.Instance.Fetch(typeof(ObjectQueryResponse), isFromPool) as ObjectQueryResponse;
-            msg.Set(error, message, entity);
+            msg.Set(entity, error, message);
             return msg;
         }
 
-        public void Set(int error = default, string message = default, byte[] entity = default)
+        public void Set(byte[] entity = default, int error = default, string message = default)
         {
+            this.Entity = entity;
             this.Error = error;
             this.Message = message;
-            this.Entity = entity;
         }
 
         public override void Dispose()

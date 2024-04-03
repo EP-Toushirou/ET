@@ -122,18 +122,18 @@ namespace ET
         [MemoryPackOrder(3)]
         public string response { get; set; }
 
-        public static M2C_TestResponse Create(int error = default, string message = default, string response = default, bool isFromPool = false)
+        public static M2C_TestResponse Create(string response = default, int error = default, string message = default, bool isFromPool = false)
         {
             M2C_TestResponse msg = ObjectPool.Instance.Fetch(typeof(M2C_TestResponse), isFromPool) as M2C_TestResponse;
-            msg.Set(error, message, response);
+            msg.Set(response, error, message);
             return msg;
         }
 
-        public void Set(int error = default, string message = default, string response = default)
+        public void Set(string response = default, int error = default, string message = default)
         {
+            this.response = response;
             this.Error = error;
             this.Message = message;
-            this.response = response;
         }
 
         public override void Dispose()
@@ -200,28 +200,28 @@ namespace ET
         /// <summary>
         /// Create G2C_EnterMap
         /// </summary>
+        /// <param name="myId">自己的UnitId</param>
         /// <param name="error">错误码</param>
         /// <param name="message">错误消息</param>
-        /// <param name="myId">自己的UnitId</param>
         /// <param name="isFromPool"></param>
-        public static G2C_EnterMap Create(int error = default, string message = default, long myId = default, bool isFromPool = false)
+        public static G2C_EnterMap Create(long myId = default, int error = default, string message = default, bool isFromPool = false)
         {
             G2C_EnterMap msg = ObjectPool.Instance.Fetch(typeof(G2C_EnterMap), isFromPool) as G2C_EnterMap;
-            msg.Set(error, message, myId);
+            msg.Set(myId, error, message);
             return msg;
         }
 
         /// <summary>
         /// Set G2C_EnterMap
         /// </summary>
+        /// <param name="myId">自己的UnitId</param>
         /// <param name="error">错误码</param>
         /// <param name="message">错误消息</param>
-        /// <param name="myId">自己的UnitId</param>
-        public void Set(int error = default, string message = default, long myId = default)
+        public void Set(long myId = default, int error = default, string message = default)
         {
+            this.MyId = myId;
             this.Error = error;
             this.Message = message;
-            this.MyId = myId;
         }
 
         public override void Dispose()
@@ -653,18 +653,18 @@ namespace ET
         [MemoryPackOrder(3)]
         public long Time { get; set; }
 
-        public static G2C_Ping Create(int error = default, string message = default, long time = default, bool isFromPool = false)
+        public static G2C_Ping Create(long time = default, int error = default, string message = default, bool isFromPool = false)
         {
             G2C_Ping msg = ObjectPool.Instance.Fetch(typeof(G2C_Ping), isFromPool) as G2C_Ping;
-            msg.Set(error, message, time);
+            msg.Set(time, error, message);
             return msg;
         }
 
-        public void Set(int error = default, string message = default, long time = default)
+        public void Set(long time = default, int error = default, string message = default)
         {
+            this.Time = time;
             this.Error = error;
             this.Message = message;
-            this.Time = time;
         }
 
         public override void Dispose()
@@ -867,20 +867,20 @@ namespace ET
         [MemoryPackOrder(5)]
         public long GateId { get; set; }
 
-        public static R2C_Login Create(int error = default, string message = default, string address = default, long key = default, long gateId = default, bool isFromPool = false)
+        public static R2C_Login Create(string address = default, long key = default, long gateId = default, int error = default, string message = default, bool isFromPool = false)
         {
             R2C_Login msg = ObjectPool.Instance.Fetch(typeof(R2C_Login), isFromPool) as R2C_Login;
-            msg.Set(error, message, address, key, gateId);
+            msg.Set(address, key, gateId, error, message);
             return msg;
         }
 
-        public void Set(int error = default, string message = default, string address = default, long key = default, long gateId = default)
+        public void Set(string address = default, long key = default, long gateId = default, int error = default, string message = default)
         {
-            this.Error = error;
-            this.Message = message;
             this.Address = address;
             this.Key = key;
             this.GateId = gateId;
+            this.Error = error;
+            this.Message = message;
         }
 
         public override void Dispose()
@@ -973,18 +973,18 @@ namespace ET
         [MemoryPackOrder(3)]
         public long PlayerId { get; set; }
 
-        public static G2C_LoginGate Create(int error = default, string message = default, long playerId = default, bool isFromPool = false)
+        public static G2C_LoginGate Create(long playerId = default, int error = default, string message = default, bool isFromPool = false)
         {
             G2C_LoginGate msg = ObjectPool.Instance.Fetch(typeof(G2C_LoginGate), isFromPool) as G2C_LoginGate;
-            msg.Set(error, message, playerId);
+            msg.Set(playerId, error, message);
             return msg;
         }
 
-        public void Set(int error = default, string message = default, long playerId = default)
+        public void Set(long playerId = default, int error = default, string message = default)
         {
+            this.PlayerId = playerId;
             this.Error = error;
             this.Message = message;
-            this.PlayerId = playerId;
         }
 
         public override void Dispose()
@@ -1088,18 +1088,18 @@ namespace ET
         [MemoryPackOrder(3)]
         public int N { get; set; }
 
-        public static M2C_TestRobotCase Create(int error = default, string message = default, int n = default, bool isFromPool = false)
+        public static M2C_TestRobotCase Create(int n = default, int error = default, string message = default, bool isFromPool = false)
         {
             M2C_TestRobotCase msg = ObjectPool.Instance.Fetch(typeof(M2C_TestRobotCase), isFromPool) as M2C_TestRobotCase;
-            msg.Set(error, message, n);
+            msg.Set(n, error, message);
             return msg;
         }
 
-        public void Set(int error = default, string message = default, int n = default)
+        public void Set(int n = default, int error = default, string message = default)
         {
+            this.N = n;
             this.Error = error;
             this.Message = message;
-            this.N = n;
         }
 
         public override void Dispose()

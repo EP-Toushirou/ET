@@ -136,28 +136,28 @@ namespace ET
         /// <summary>
         /// Create Map2Match_GetRoom
         /// </summary>
+        /// <param name="actorId">房间的ActorId</param>
         /// <param name="error">错误码</param>
         /// <param name="message">错误消息</param>
-        /// <param name="actorId">房间的ActorId</param>
         /// <param name="isFromPool"></param>
-        public static Map2Match_GetRoom Create(int error = default, string message = default, ActorId actorId = default, bool isFromPool = false)
+        public static Map2Match_GetRoom Create(ActorId actorId = default, int error = default, string message = default, bool isFromPool = false)
         {
             Map2Match_GetRoom msg = ObjectPool.Instance.Fetch(typeof(Map2Match_GetRoom), isFromPool) as Map2Match_GetRoom;
-            msg.Set(error, message, actorId);
+            msg.Set(actorId, error, message);
             return msg;
         }
 
         /// <summary>
         /// Set Map2Match_GetRoom
         /// </summary>
+        /// <param name="actorId">房间的ActorId</param>
         /// <param name="error">错误码</param>
         /// <param name="message">错误消息</param>
-        /// <param name="actorId">房间的ActorId</param>
-        public void Set(int error = default, string message = default, ActorId actorId = default)
+        public void Set(ActorId actorId = default, int error = default, string message = default)
         {
+            this.ActorId = actorId;
             this.Error = error;
             this.Message = message;
-            this.ActorId = actorId;
         }
 
         public override void Dispose()
@@ -235,19 +235,19 @@ namespace ET
         [MemoryPackOrder(5)]
         public int Frame { get; set; }
 
-        public static Room2G_Reconnect Create(int error = default, string message = default, long startTime = default, int frame = default, bool isFromPool = false)
+        public static Room2G_Reconnect Create(long startTime = default, int frame = default, int error = default, string message = default, bool isFromPool = false)
         {
             Room2G_Reconnect msg = ObjectPool.Instance.Fetch(typeof(Room2G_Reconnect), isFromPool) as Room2G_Reconnect;
-            msg.Set(error, message, startTime, frame);
+            msg.Set(startTime, frame, error, message);
             return msg;
         }
 
-        public void Set(int error = default, string message = default, long startTime = default, int frame = default)
+        public void Set(long startTime = default, int frame = default, int error = default, string message = default)
         {
-            this.Error = error;
-            this.Message = message;
             this.StartTime = startTime;
             this.Frame = frame;
+            this.Error = error;
+            this.Message = message;
         }
 
         public override void Dispose()

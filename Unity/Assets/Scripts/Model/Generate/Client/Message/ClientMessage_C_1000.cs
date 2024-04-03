@@ -85,18 +85,18 @@ namespace ET
         [MemoryPackOrder(3)]
         public long PlayerId { get; set; }
 
-        public static NetClient2Main_Login Create(int error = default, string message = default, long playerId = default, bool isFromPool = false)
+        public static NetClient2Main_Login Create(long playerId = default, int error = default, string message = default, bool isFromPool = false)
         {
             NetClient2Main_Login msg = ObjectPool.Instance.Fetch(typeof(NetClient2Main_Login), isFromPool) as NetClient2Main_Login;
-            msg.Set(error, message, playerId);
+            msg.Set(playerId, error, message);
             return msg;
         }
 
-        public void Set(int error = default, string message = default, long playerId = default)
+        public void Set(long playerId = default, int error = default, string message = default)
         {
+            this.PlayerId = playerId;
             this.Error = error;
             this.Message = message;
-            this.PlayerId = playerId;
         }
 
         public override void Dispose()

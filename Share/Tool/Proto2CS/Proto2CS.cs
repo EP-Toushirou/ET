@@ -175,6 +175,44 @@ namespace ET
                                     break;
                                 }
                             }
+
+                            // IResponse的固定参数Error和Message移动到最后面
+                            if (responeTypes.ContainsKey(parentClass))
+                            {
+                                ParamInfo errorParamInfo = null;
+                                ParamInfo messageParamInfo = null;
+
+                                for (int i = paramInfos.Count - 1; i >= 0; i--)
+                                {
+                                    ParamInfo tempInfo = paramInfos[i];
+                                    switch (tempInfo.Name)
+                                    {
+                                        case "Error":
+                                            errorParamInfo = tempInfo;
+                                            paramInfos.RemoveAt(i);
+                                            break;
+                                        case "Message":
+                                            messageParamInfo = tempInfo;
+                                            paramInfos.RemoveAt(i);
+                                            break;
+                                    }
+
+                                    if (errorParamInfo != null && messageParamInfo != null)
+                                    {
+                                        break;
+                                    }
+                                }
+
+                                if (errorParamInfo != null)
+                                {
+                                    paramInfos.Add(errorParamInfo);
+                                }
+
+                                if (messageParamInfo != null)
+                                {
+                                    paramInfos.Add(messageParamInfo);
+                                }
+                            }
                         }
 
                         // 带参数消息才生成带参Create方法和Set方法
